@@ -8,9 +8,10 @@ class Header extends Component{
     const month = new Date().getMonth() + 1;
     const year = new Date().getFullYear();
     const date = month + '/' + day + '/' + year;
+    
     return(
       <header className="header">
-        <h1> Journal </h1>
+        <h1> Journal {date}</h1>
       </header>
     )
   }

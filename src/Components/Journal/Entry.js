@@ -10,13 +10,15 @@ class Entry extends Component{
             handleToggleEditing={this.props.handleToggleEditing}
             isEditing={this.props.isEditing}
             handleConentEdits={e => this.props.setContent(e.target.value)}
-            index={this.props.index + 1}
+            index={this.props.index}
           />
         </ul>
-        <button onClick={this.props.handleRemoveEntry}>remove</button>
-        <button className={this.props.isEditing ? "save" : "edit"} onClick={this.props.handleToggleEditing}>
-          {this.props.isEditing ? "save" : "edit"}
-        </button>
+
+        {/*
+          <button className={this.props.isEditing ? "save" : "edit"} onClick={this.props.handleToggleEditing}>
+            {this.props.isEditing ? "save" : "edit"}
+          </button>
+        */}
       </div>
     )
   }

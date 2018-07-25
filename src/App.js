@@ -26,8 +26,21 @@ class App extends Component {
       })
     })
 
+    validateSubmission = () => {
+      let valid = true;
+      const pendingEntry = this.state.pendingEntry;
+      // Validate that pending entry is not blank
+      if (pendingEntry || pendingEntry === '') {
+        valid = false
+      }
+      // if last entry was today == valid
+      // one journal per day validation
+      return valid
+    }
+
 
     handleEntrySubmit = e => {
+      // let invalid = true ...
       e.preventDefault();
       const id = uuid.v4();
       const day = new Date().getDate();
@@ -36,30 +49,18 @@ class App extends Component {
       const date = `${month}-${day}-${year}`;
       this.setState({
         entries: [
+          ...this.state.entries,
           {
             content: this.state.pendingEntry,
             date: date,
             isEditing: false,
             id: id
-          },
-          ...this.state.entries
+          }
         ],
         pendingEntry: ''
       });
     }
 
-  setContent = (content, id) =>
-    this.setState({
-      entries: this.state.entries.map(entry => {
-        if (id === entry.id){
-          return {
-            ...entry,
-            content
-          };
-        }
-        return entry;
-      })
-    });
 
   handleContentInput = e =>
     this.setState({ pendingEntry: e.target.value})
@@ -77,6 +78,7 @@ class App extends Component {
           return {
             ...entry,
             [property]: !entry[property]
+
           };
         }
         return entry;
@@ -85,6 +87,7 @@ class App extends Component {
 
   toggleEditing = id =>
     this.toggleEntryProperty("isEditing", id);
+
 
   render() {
     return (
