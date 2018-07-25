@@ -15,6 +15,9 @@ class Journal extends Component{
         <Entries
           entries={this.props.entries}
           toggleEditing={this.props.toggleEditing}
+          handleContentEdits={this.props.handleContentEdits}
+          setContent={this.props.setContent}
+          removeEntry={this.props.removeEntry}
         />
       </div>
     )

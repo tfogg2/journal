@@ -1,1 +1,88 @@
-
+.header{
+  padding: 20px;
+}
+.journal, .header{
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+.journal{
+  border: .5px solid #e0e0e0;
+  padding: 20px 0;
+}
+.entryInput{
+  padding: 10px 0;
+}
+.entryInput form{
+  height: 30px;
+  box-sizing: border-box;
+}
+.entryInput input{
+  margin: 0px 10px;
+  width: 400px;
+  height: 30px;
+  box-sizing: border-box;
+  font-size: 14px;
+  border-radius: 4px;
+  border: 1px solid #e0e0e0;
+  padding: 0 5px;
+  outline-color: #009688;
+}
+.entryInput button{
+  height: 30px;
+  box-sizing: border-box;
+  background: #009688;
+  border: none;
+  border-radius: 5px;
+  padding: 0 20px;
+  font-size: 14px;
+  color: #fff;
+}
+.entries{
+  margin: 0 auto;
+  overflow: overlay;
+  background: #fff;
+}
+.entry{
+  height: 40px;
+  width: 90%;
+  margin: 0 auto;
+  text-align: left;
+  overflow: overlay;
+  padding: 5px;
+  line-height: 40px;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+}
+.entry ul{
+  float: left;
+  margin: 0;
+  list-style-type: none;
+}
+.entry button{
+  float: right;
+  margin:8px 8px 8px 0px;
+  height: 25px;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 2px;
+  font-size: 12px;
+}
+.entry span {
+  margin-right: 5px;
+}
+.entry input {
+  height: 30px;
+  box-sizing: border-box;
+  font-size: 14px;
+  border-radius: 4px;
+  border: 1px solid #e0e0e0;
+  padding: 0 5px;
+  min-width: 300px;
+  outline-color: #009688;
+}
+.entry .save{
+  background: #009688;
+  color: #fff;
+  border: none;
+}

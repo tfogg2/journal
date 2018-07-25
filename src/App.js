@@ -24,7 +24,8 @@ class App extends Component {
         }
         return entry;
       })
-    });
+    })
+
 
     handleEntrySubmit = e => {
       e.preventDefault();
@@ -32,13 +33,14 @@ class App extends Component {
       const day = new Date().getDate();
       const month = new Date().getMonth() + 1;
       const year = new Date().getFullYear();
-      const date = month + '/' + day + '/' + year;
+      const date = `${month}-${day}-${year}`;
       this.setState({
         entries: [
           {
             content: this.state.pendingEntry,
             date: date,
-            isEditing: false
+            isEditing: false,
+            id: id
           },
           ...this.state.entries
         ],
@@ -46,8 +48,22 @@ class App extends Component {
       });
     }
 
+  setContent = (content, id) =>
+    this.setState({
+      entries: this.state.entries.map(entry => {
+        if (id === entry.id){
+          return {
+            ...entry,
+            content
+          };
+        }
+        return entry;
+      })
+    });
+
   handleContentInput = e =>
     this.setState({ pendingEntry: e.target.value})
+
 
   removeEntry = id =>
       this.setState({
@@ -82,6 +98,8 @@ class App extends Component {
           handleContentInput={this.handleContentInput}
           handleEntrySubmit={this.handleEntrySubmit}
           toggleEditing={this.toggleEditing}
+          setContent={this.setContent}
+          removeEntry={this.removeEntry}
         />
 
       </div>

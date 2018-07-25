@@ -13,7 +13,9 @@ class Entries extends Component{
               date={entry.date}
               isEditing={entry.isEditing}
               handleToggleEditing={() => this.props.toggleEditing(entry.id)}
-              handleRemoveEntry={() => this.props.removeGuestAt(entry.id)}
+              setContent={text => this.props.setContent(text, entry.id)}
+              handleRemoveEntry={() => this.props.removeEntry(entry.id)}
+              index={index}
             />
         )}
       </div>

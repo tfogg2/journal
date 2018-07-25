@@ -4,17 +4,20 @@ class EntryContent extends Component{
   render(){
     if (this.props.isEditing){
       return(
-        <input
-          type="text"
-          value={this.props.content}
-          onChange={this.props.handleConentEdits}
-        />
+        <div>
+          <span>{this.props.index}. </span>
+          <input
+            type="text"
+            value={this.props.content}
+            onChange={this.props.handleConentEdits}
+          />
+        </div>
       );
     }
     return (
-      <div className="entry-content">
-        <span>{this.props.content}</span>
-      </div>
+      <li className="entry-content">
+        {this.props.index}. {this.props.content}
+      </li>
     )
   }
 }
