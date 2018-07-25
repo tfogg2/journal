@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Header from './Components/Header.js';
 import Journal from './Components/Journal/Journal.js';
 import uuid from 'uuid';
+import moment from 'moment'
 import './App.css';
 
 class App extends Component {
@@ -39,6 +40,8 @@ class App extends Component {
     }
 
 
+
+
     handleEntrySubmit = e => {
       // let invalid = true ...
       e.preventDefault();
@@ -46,14 +49,14 @@ class App extends Component {
       const day = new Date().getDate();
       const month = new Date().getMonth() + 1;
       const year = new Date().getFullYear();
-      const date = `${month}-${day}-${year}`;
+      const date = moment().format();
       this.setState({
         entries: [
           ...this.state.entries,
           {
             content: this.state.pendingEntry,
             date: date,
-            isEditing: false,
+            isEditing: true,
             id: id
           }
         ],
@@ -90,10 +93,13 @@ class App extends Component {
 
 
   render() {
+
+    const todaysDate = moment().format("MMMM Do YYYY");
+
     return (
       <div className="App">
 
-        <Header />
+        <Header todaysDate={todaysDate}/>
 
         <Journal
           entries={this.state.entries}

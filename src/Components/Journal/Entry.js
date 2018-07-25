@@ -11,6 +11,7 @@ class Entry extends Component{
             isEditing={this.props.isEditing}
             handleConentEdits={e => this.props.setContent(e.target.value)}
             index={this.props.index}
+            handleEntrySubmit={this.props.handleEntrySubmit}
           />
         </ul>
 

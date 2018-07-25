@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import moment from "moment";
 
 class Header extends Component{
 
@@ -7,11 +8,11 @@ class Header extends Component{
     const day = new Date().getDate();
     const month = new Date().getMonth() + 1;
     const year = new Date().getFullYear();
-    const date = month + '/' + day + '/' + year;
-    
+    const date = this.props.todaysDate;
+
     return(
       <header className="header">
-        <h1> Journal {date}</h1>
+        <h1>{date}</h1>
       </header>
     )
   }

@@ -2,25 +2,22 @@ import React, { Component } from 'react';
 
 class EntryContent extends Component{
 
+    componentDidUpdate(){
 
-  componentDidUpdate(){
-    if (this.props.isEditing){
-      const id = this.props.index;
-      this.entryInput.focus();
     }
-  }
+
 
   render(){
     if (this.props.isEditing){
       return(
         <li>
-          <form onSubmit={this.props.handleToggleEditing}>
+          <form onSubmit={this.props.handleEntrySubmit}>
             <input
               type="text"
               name="entryInput"
               value={this.props.content}
               onChange={this.props.handleConentEdits}
-              ref={(input, index) => { this.entryInput = input; }}
+              ref={c => (this._input = c)}
             />
             <button
               type="submit"
@@ -33,7 +30,7 @@ class EntryContent extends Component{
       );
     }
     return (
-      <li className="entry-content" onClick={this.props.handleToggleEditing}>
+      <li className="entry-content">
        {this.props.content}
       </li>
     )

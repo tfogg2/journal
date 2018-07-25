@@ -4,20 +4,25 @@ class EntryInputForm extends Component {
   render(){
     return(
       <div className="entryInput">
-        <form onSubmit={this.props.handleEntrySubmit}>
-            <input
-              type="text"
-              onChange={this.props.handleContentInput}
-              value={this.props.pendingEntry}
-              placeholder="Create an entry"
-            />
+        <ul>
+          <form onSubmit={this.props.handleEntrySubmit}>
+            <li>
+              <input
+                type="text"
+                onChange={this.props.handleContentInput}
+                value={this.props.pendingEntry}
+                placeholder=""
+                autoFocus="true"
+              />
+            </li>
             <button
               type="submit"
               name="submit"
               value="submit">Submit
 
             </button>
-        </form>
+          </form>
+        </ul>
       </div>
     )
   }

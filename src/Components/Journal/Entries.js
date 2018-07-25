@@ -16,6 +16,7 @@ class Entries extends Component{
               setContent={text => this.props.setContent(text, entry.id)}
               handleRemoveEntry={() => this.props.removeEntry(entry.id)}
               index={index}
+              handleEntrySubmit={this.props.handleEntrySubmit}
             />
         )}
       </div>
