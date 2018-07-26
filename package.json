@@ -6,13 +6,17 @@
     "ajv": "^6.5.2",
     "babel-loader": "^7.1.5",
     "babel-preset-react": "^6.24.1",
+    "immutable": "^3.8.2",
     "moment": "^2.22.2",
     "moment-timezone": "^0.5.21",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
+    "react-icons-kit": "^1.1.7",
     "react-keydown": "^1.9.7",
     "react-moment": "^0.7.9",
     "react-scripts": "1.1.4",
+    "slate": "^0.34.7",
+    "slate-react": "^0.13.4",
     "uuid": "^3.3.2"
   },
   "scripts": {

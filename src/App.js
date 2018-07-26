@@ -2,19 +2,85 @@ import React, { Component } from 'react';
 import Header from './Components/Header.js';
 import Journals from './Components/Journals/Journals.js';
 import uuid from 'uuid';
-import moment from 'moment'
+import moment from 'moment';
+import { Editor } from 'slate-react';
+import { Value } from 'slate';
+import FormatToolbar from './Components/FormatToolbar.js';
+import Icon from 'react-icons-kit';
+import { bold } from 'react-icons-kit/feather/bold';
+import { italic } from 'react-icons-kit/feather/italic';
 import './App.css';
+
+// Create our initial value...
+const initialValue = Value.fromJSON({
+  document: {
+    nodes: [
+      {
+        object: 'block',
+        type: 'paragraph',
+        nodes: [
+          {
+            object: 'text',
+            leaves: [
+              {
+                text: 'A line of text in a paragraph.',
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+})
+
+function BoldMark(props) {
+  return <strong>{props.children}</strong>
+}
+
+function MarkHotkey(options) {
+  const { type, key } = options
+
+  return {
+    onKeyDown(event, change) {
+      // Check that the key pressed matches our `key` option.
+      if (!event.ctrlKey || event.key != key) return
+
+      event.preventDefault()
+
+      change.toggleMark(type)
+      return true
+    },
+  }
+}
+
+const boldPlugin = MarkHotkey({
+  type: 'bold',
+  key: 'b',
+})
+
+const plugins = [
+  MarkHotkey({ key: 'b', type: 'bold' }),
+  MarkHotkey({ key: '`', type: 'code' }),
+  MarkHotkey({ key: 'i', type: 'italic' }),
+  MarkHotkey({ key: '~', type: 'strikethrough' }),
+  MarkHotkey({ key: 'u', type: 'underline' }),
+]
 
 class App extends Component {
 
   state = {
     pendingEntry: "",
     entries: [],
-    journals: []
+    journals: [],
+    value: initialValue,
   }
 
   componentDidUpdate() {
     this._commitAutoSave();
+  }
+
+  onChange = ({ value }) => {
+    this.setState({ value })
   }
 
   _commitAutoSave = () => {
@@ -77,17 +143,21 @@ class App extends Component {
         entries: this.state.entries.filter(entry => id !== entry.id)
       })
 
-  handleDelete = (e) => {
-    console.log('hello');
-    var KeyId = e.target.keyCode;
-    console.log(KeyId)
-    if (e.keyCode === 8) {
-        console.log('BACKSPACE was pressed');
-    }
-    if (e.keyCode === 46) {
-        console.log('DELETE was pressed');
-    }
-  }
+  renderMark = props => {
+     switch (props.mark.type) {
+       case 'bold':
+         return <strong>{props.children}</strong>
+       // Add our new mark renderers...
+       case 'code':
+         return <code>{props.children}</code>
+       case 'italic':
+         return <em>{props.children}</em>
+       case 'strikethrough':
+         return <del>{props.children}</del>
+       case 'underline':
+         return <u>{props.children}</u>
+     }
+   }
 
   toggleEntryProperty = (property, id) =>
     this.setState({
@@ -126,6 +196,23 @@ class App extends Component {
           removeEntry={this.removeEntry}
           handleConentEdits={this.handleConentEdits}
           handleDelete={this.handleDelete}
+        />
+
+        <FormatToolbar>
+          <button className="tooltop-icon-button">
+            <Icon icon={bold} />
+          </button>
+          <button className="tooltop-icon-button">
+            <Icon icon={italic} />
+          </button>
+        </FormatToolbar>
+
+        <Editor
+          value={this.state.value}
+          onChange={this.onChange}
+          onKeyDown={this.onKeyDown}
+          renderMark={this.renderMark}
+          plugins={plugins}
         />
 
       </div>
