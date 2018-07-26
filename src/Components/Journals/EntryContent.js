@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
+import keydown from 'react-keydown';
 
 class EntryContent extends Component{
-
-    componentDidUpdate(){
-
-    }
-
-
   render(){
     if (this.props.isEditing){
       return(
@@ -17,7 +12,7 @@ class EntryContent extends Component{
               name="entryInput"
               value={this.props.content}
               onChange={this.props.handleConentEdits}
-              ref={c => (this._input = c)}
+              onKeyDown={this.props.handleKeyDown}
             />
             <button
               type="submit"

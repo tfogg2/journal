@@ -9,6 +9,7 @@ class Entries extends Component{
         {this.props.entries.map((entry, index) =>
             <Entry
               key={index}
+              id={entry.id}
               content={entry.content}
               date={entry.date}
               isEditing={entry.isEditing}
@@ -17,6 +18,7 @@ class Entries extends Component{
               handleRemoveEntry={() => this.props.removeEntry(entry.id)}
               index={index}
               handleEntrySubmit={this.props.handleEntrySubmit}
+              handleDelete={this.props.handleDelete}
             />
         )}
       </div>

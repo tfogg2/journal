@@ -5,9 +5,6 @@ class Header extends Component{
 
 
   render(){
-    const day = new Date().getDate();
-    const month = new Date().getMonth() + 1;
-    const year = new Date().getFullYear();
     const date = this.props.todaysDate;
 
     return(

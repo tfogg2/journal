@@ -14,12 +14,15 @@ class Journal extends Component{
           setContent={this.props.setContent}
           removeEntry={this.props.removeEntry}
           handleEntrySubmit={this.props.handleEntrySubmit}
+          handleDelete={this.props.handleDelete}
         />
         <EntryInputForm
           entries={this.props.entries}
           pendingEntry={this.props.pendingEntry}
           handleEntrySubmit={this.props.handleEntrySubmit}
           handleContentInput={this.props.handleContentInput}
+          handleContentEdits={this.props.handleContentEdits}
+          
         />
       </div>
     )

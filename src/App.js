@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Header from './Components/Header.js';
-import Journal from './Components/Journal/Journal.js';
+import Journals from './Components/Journals/Journals.js';
 import uuid from 'uuid';
 import moment from 'moment'
 import './App.css';
@@ -9,10 +9,17 @@ class App extends Component {
 
   state = {
     pendingEntry: "",
-    entries: []
+    entries: [],
+    journals: []
   }
 
+  componentDidUpdate() {
+    this._commitAutoSave();
+  }
 
+  _commitAutoSave = () => {
+
+  }
 
   setContent = (content, id) =>
     this.setState({
@@ -39,16 +46,10 @@ class App extends Component {
       return valid
     }
 
-
-
-
     handleEntrySubmit = e => {
       // let invalid = true ...
       e.preventDefault();
       const id = uuid.v4();
-      const day = new Date().getDate();
-      const month = new Date().getMonth() + 1;
-      const year = new Date().getFullYear();
       const date = moment().format();
       this.setState({
         entries: [
@@ -64,15 +65,29 @@ class App extends Component {
       });
     }
 
-
-  handleContentInput = e =>
-    this.setState({ pendingEntry: e.target.value})
+  handleContentInput = e =>{
+    this.setState({
+      pendingEntry: e.target.value,
+    })
+  }
 
 
   removeEntry = id =>
       this.setState({
         entries: this.state.entries.filter(entry => id !== entry.id)
       })
+
+  handleDelete = (e) => {
+    console.log('hello');
+    var KeyId = e.target.keyCode;
+    console.log(KeyId)
+    if (e.keyCode === 8) {
+        console.log('BACKSPACE was pressed');
+    }
+    if (e.keyCode === 46) {
+        console.log('DELETE was pressed');
+    }
+  }
 
   toggleEntryProperty = (property, id) =>
     this.setState({
@@ -101,7 +116,7 @@ class App extends Component {
 
         <Header todaysDate={todaysDate}/>
 
-        <Journal
+        <Journals
           entries={this.state.entries}
           pendingEntry={this.state.pendingEntry}
           handleContentInput={this.handleContentInput}
@@ -109,6 +124,8 @@ class App extends Component {
           toggleEditing={this.toggleEditing}
           setContent={this.setContent}
           removeEntry={this.removeEntry}
+          handleConentEdits={this.handleConentEdits}
+          handleDelete={this.handleDelete}
         />
 
       </div>
