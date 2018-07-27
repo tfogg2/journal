@@ -47,12 +47,6 @@
   border: none;
   cursor: text;
 }
-ul{
-  float: left;
-  margin: 0;
-  width: 90%;
-}
-
 .entry input {
   height: 30px;
   box-sizing: border-box;
@@ -69,4 +63,20 @@ ul{
 }
 .entryInputSubmit{
   display: none;
+}
+.editor{
+  min-height: 100px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.editContent{
+  padding: 10px;
+}
+.formatToolbar{
+  display: flex;
+}
+.tooltip-icon-button{
+  background: none;
+  border: 0;
+  cursor: pointer;
 }

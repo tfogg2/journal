@@ -9,6 +9,9 @@ import FormatToolbar from './Components/FormatToolbar.js';
 import Icon from 'react-icons-kit';
 import { bold } from 'react-icons-kit/feather/bold';
 import { italic } from 'react-icons-kit/feather/italic';
+import { list } from 'react-icons-kit/feather/list';
+import { underline } from 'react-icons-kit/feather/underline';
+import { code } from 'react-icons-kit/feather/code';
 import './App.css';
 
 // Create our initial value...
@@ -87,6 +90,16 @@ class App extends Component {
 
   }
 
+  onMarkClick = (e, type) => {
+    e.preventDefault();
+
+    const { value } = this.state;
+
+    const change = value.change().toggleMark(type);
+
+    this.onChange(change);
+  }
+
   setContent = (content, id) =>
     this.setState({
       entries: this.state.entries.map(entry => {
@@ -156,6 +169,12 @@ class App extends Component {
          return <del>{props.children}</del>
        case 'underline':
          return <u>{props.children}</u>
+       case 'list':
+        return (
+          <ul {...props.attributes}>
+            <li>{props.children}</li>
+          </ul>
+        );
      }
    }
 
@@ -186,34 +205,36 @@ class App extends Component {
 
         <Header todaysDate={todaysDate}/>
 
-        <Journals
-          entries={this.state.entries}
-          pendingEntry={this.state.pendingEntry}
-          handleContentInput={this.handleContentInput}
-          handleEntrySubmit={this.handleEntrySubmit}
-          toggleEditing={this.toggleEditing}
-          setContent={this.setContent}
-          removeEntry={this.removeEntry}
-          handleConentEdits={this.handleConentEdits}
-          handleDelete={this.handleDelete}
-        />
+        {/*
+          <Journals
+            entries={this.state.entries}
+            pendingEntry={this.state.pendingEntry}
+            handleContentInput={this.handleContentInput}
+            handleEntrySubmit={this.handleEntrySubmit}
+            toggleEditing={this.toggleEditing}
+            setContent={this.setContent}
+            removeEntry={this.removeEntry}
+            handleConentEdits={this.handleConentEdits}
+            handleDelete={this.handleDelete}
+          />
+        */}
 
-        <FormatToolbar>
-          <button className="tooltop-icon-button">
-            <Icon icon={bold} />
-          </button>
-          <button className="tooltop-icon-button">
-            <Icon icon={italic} />
-          </button>
-        </FormatToolbar>
+        <div className="editor">
 
-        <Editor
-          value={this.state.value}
-          onChange={this.onChange}
-          onKeyDown={this.onKeyDown}
-          renderMark={this.renderMark}
-          plugins={plugins}
-        />
+          <FormatToolbar
+            renderMark={this.renderMark}
+            onMarkClick={this.onMarkClick}
+          />
+
+          <Editor
+            value={this.state.value}
+            onChange={this.onChange}
+            onKeyDown={this.onKeyDown}
+            renderMark={this.renderMark}
+            plugins={plugins}
+            className="editContent"
+          />
+        </div>
 
       </div>
     );
