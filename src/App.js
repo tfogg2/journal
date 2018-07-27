@@ -76,6 +76,7 @@ class App extends Component {
     entries: [],
     journals: [],
     value: initialValue,
+    isActive: false
   }
 
   componentDidUpdate() {
@@ -195,6 +196,11 @@ class App extends Component {
   toggleEditing = id =>
     this.toggleEntryProperty("isEditing", id);
 
+  isActive = () =>
+    this.setState({
+      isActive: true
+    });
+
 
   render() {
 
@@ -224,6 +230,7 @@ class App extends Component {
           <FormatToolbar
             renderMark={this.renderMark}
             onMarkClick={this.onMarkClick}
+            isActive={this.isActive}
           />
 
           <Editor
@@ -234,6 +241,7 @@ class App extends Component {
             plugins={plugins}
             className="editContent"
           />
+
         </div>
 
       </div>

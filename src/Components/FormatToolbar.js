@@ -13,6 +13,7 @@ class FormatToolbar extends Component{
       <div className="formatToolbar">
         <button
           className="tooltip-icon-button"
+          onClick={this.props.isActive}
           onPointerDown={(e) => this.props.onMarkClick(e, 'bold')}>
           <Icon icon={bold} />
         </button>
